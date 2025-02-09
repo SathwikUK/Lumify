@@ -1,0 +1,85 @@
+/* Scope styles to a specific page using a unique class */
+.index-page {
+  @apply bg-black text-white;
+}
+
+.index-page .font-radiance {
+  font-family: 'Radiance', sans-serif;
+}
+
+/* Glowing particles animation */
+.index-page .particles {
+  @apply absolute inset-0 pointer-events-none;
+}
+
+.index-page .particle {
+  @apply absolute w-1 h-1 bg-yellow-400 rounded-full;
+  left: var(--x);
+  top: var(--y);
+  animation: float var(--duration) infinite;
+  animation-delay: var(--delay);
+  opacity: 0;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(100px, -100px);
+    opacity: 0;
+  }
+}
+
+/* Glitch effect */
+.index-page .glitch-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.index-page .glitch-container::before,
+.index-page .glitch-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  opacity: 0.5;
+  mix-blend-mode: hard-light;
+}
+
+.index-page .glitch-container::before {
+  animation: glitch 2s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  transform: translate(-5px);
+}
+
+.index-page .glitch-container::after {
+  animation: glitch 2s infinite reverse;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  transform: translate(5px);
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-5px, 5px);
+  }
+  40% {
+    transform: translate(-5px, -5px);
+  }
+  60% {
+    transform: translate(5px, 5px);
+  }
+  80% {
+    transform: translate(5px, -5px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
