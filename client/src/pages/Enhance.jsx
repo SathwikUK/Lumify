@@ -3,8 +3,7 @@ import "./Enhance.css";
 import axios from "axios";
 import { LuDownload } from "react-icons/lu";
 import { FiSave } from "react-icons/fi";
-
-import defaultImage from '../assets/lumify.png'
+import defaultImage from "../assets/lumify.png";
 
 const Enhance = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -40,13 +39,11 @@ const Enhance = () => {
   const handleEnhance = async () => {
     if (!selectedImage) return;
     setLoading(true);
-
     const formData = new FormData();
     formData.append("image", selectedImage);
 
     try {
       const response = await axios.post("http://localhost:5000/predict", formData);
-
       const timestamp = Date.now();
       const enhancedData = {};
 
@@ -56,7 +53,6 @@ const Enhance = () => {
       if (response.data.annotated_image_url) {
         enhancedData.annotated_image_url = `${response.data.annotated_image_url}?key=${timestamp}`;
       }
-
       setEnhancedImages(enhancedData);
     } catch (error) {
       console.error("Error enhancing the image:", error);
@@ -64,62 +60,46 @@ const Enhance = () => {
       setLoading(false);
     }
   };
+
+  // Save image with custom name
   const saveImage = async (imageUrl, defaultName) => {
     try {
-      const response = await fetch(imageUrl, {
-        mode: "cors",
-      });
+      const response = await fetch(imageUrl, { mode: "cors" });
       const blob = await response.blob();
       const blobUrl = window.URL.createObjectURL(blob);
-  
-      // Prompt user to enter a file name
       const userFileName = prompt("Enter file name:", defaultName);
       if (userFileName) {
-        // Create a hidden anchor element
         const link = document.createElement("a");
         link.href = blobUrl;
-        link.setAttribute("download", userFileName); // Set the file name for download
+        link.setAttribute("download", userFileName);
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
       }
-  
-      // Revoke the blob URL to free memory
       window.URL.revokeObjectURL(blobUrl);
     } catch (error) {
       console.error("Error saving the image:", error);
     }
   };
-  
-     
-  
 
-
-  // Download image helper
+  // Download image with default name
   const downloadImage = async (imageUrl, name) => {
     try {
-      const response = await fetch(imageUrl, {
-        mode: 'cors',
-      });
+      const response = await fetch(imageUrl, { mode: "cors" });
       const blob = await response.blob();
       const blobUrl = window.URL.createObjectURL(blob);
-  
       const link = document.createElement("a");
       link.href = blobUrl;
       link.setAttribute("download", name);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-  
-      // Clean up the blob URL after the download
       window.URL.revokeObjectURL(blobUrl);
     } catch (error) {
       console.error("Error downloading the image:", error);
     }
   };
-  
 
-  
   return (
     <div className="collaborative-container">
       {/* Fireflies Background */}
@@ -137,6 +117,7 @@ const Enhance = () => {
           ></div>
         ))}
       </div>
+
       {/* Upload Area */}
       <div
         className="upload-area"
@@ -159,10 +140,10 @@ const Enhance = () => {
         {selectedImage && <p className="file-name">{selectedImage.name}</p>}
       </div>
 
-      {/* Center Div for Enhance Button */}
+      {/* Enhance Button */}
       <div className="center-div">
         {loading ? (
-          <span className="loader"></span> 
+          <span className="loader"></span>
         ) : (
           <button onClick={handleEnhance} disabled={!selectedImage}>
             Enhance
@@ -170,79 +151,65 @@ const Enhance = () => {
         )}
       </div>
 
-      {/* Right Div for Enhanced Images */}
-      {/* Right Div for Enhanced Images */}
+      {/* Enhanced Images */}
       <div className="right-div">
-  {enhancedImages ? (
-    <>
-      {enhancedImages.enhanced_image_url && (
-        <div className="image-container">
-          <h3>Enhanced Image</h3>
-          <img
-            src={enhancedImages.enhanced_image_url}
-            alt="Enhanced"
-            className="output-image"
-          />
-          <div className="icon-containera">
-            <LuDownload
-              className="download-icon"
-              onClick={() =>
-                downloadImage(
-                  enhancedImages.enhanced_image_url,
-                  "enhanced_image.jpg"
-                )
-              }
-            />
-            <FiSave
-                className="save-icon"
-                onClick={() =>
-                  saveImage(
-                    enhancedImages.enhanced_image_url,
-                    "enhanced_image.jpg"
-                  )
-                }
-              />
+        {enhancedImages ? (
+          <>
+            {enhancedImages.enhanced_image_url && (
+              <div className="image-container">
+                <h3>Enhanced Image</h3>
+                <img
+                  src={enhancedImages.enhanced_image_url}
+                  alt="Enhanced"
+                  className="output-image"
+                />
+                <div className="icon-containera">
+                  <LuDownload
+                    className="download-icon"
+                    onClick={() =>
+                      downloadImage(enhancedImages.enhanced_image_url, "enhanced_image.jpg")
+                    }
+                  />
+                  <FiSave
+                    className="save-icon"
+                    onClick={() =>
+                      saveImage(enhancedImages.enhanced_image_url, "enhanced_image.jpg")
+                    }
+                  />
+                </div>
+              </div>
+            )}
+            {enhancedImages.annotated_image_url && (
+              <div className="image-container">
+                <h3>Enhanced Image with Faces</h3>
+                <img
+                  src={enhancedImages.annotated_image_url}
+                  alt="Enhanced with Faces"
+                  className="output-image"
+                />
+                <div className="icon-containerb">
+                  <LuDownload
+                    className="download-icon"
+                    onClick={() =>
+                      downloadImage(enhancedImages.annotated_image_url, "enhanced_with_faces.jpg")
+                    }
+                  />
+                  <FiSave
+                    className="save-icon"
+                    onClick={() =>
+                      saveImage(enhancedImages.annotated_image_url, "enhanced_with_faces.jpg")
+                    }
+                  />
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <div>
+            <img src={defaultImage} alt="Default" className="default-image" />
           </div>
-        </div>
-      )}
-      {enhancedImages.annotated_image_url && (
-        <div className="image-container">
-          <h3>Enhanced Image with Faces</h3>
-          <img
-            src={enhancedImages.annotated_image_url}
-            alt="Enhanced with Faces"
-            className="output-image"
-          />
-          <div className="icon-containerb">
-            <LuDownload
-              className="download-icon"
-              onClick={() =>
-                downloadImage(
-                  enhancedImages.annotated_image_url,
-                  "enhanced_with_faces.jpg"
-                )
-              }
-            />
-            <FiSave
-                className="save-icon"
-                onClick={() =>
-                  saveImage(
-                    enhancedImages.enhanced_image_url,
-                    "enhanced_image.jpg"
-                  )
-                }
-              />
-          </div>
-        </div>
-      )}
-    </>
-  ) : (
-    <div>
-      <img src={defaultImage} alt="Default" className="default-image" />
-    </div>
-  )}
-</div>
-
+        )}
+      </div>
     </div>
   );
 };

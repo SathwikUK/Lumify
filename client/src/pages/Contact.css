@@ -1,28 +1,36 @@
+/* Global: Hide scrollbars on all elements */
+* {
+  scrollbar-width: none;           /* Firefox */
+  -ms-overflow-style: none;        /* IE and Edge */
+}
+*::-webkit-scrollbar {
+  display: none;                   /* Chrome, Safari, Opera */
+}
+
+/* --------------------
+   CONTACT CONTAINER
+-------------------- */
 .contact-container {
   min-height: 100vh;
   background-color: black;
   padding: 8rem 1rem 2rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* Spread form on left, 3D container on right */
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 2rem;
 }
 
+/* --------------------
+   LEFT SIDE: FORM
+-------------------- */
 .contact-content-left {
-  max-width: 600px;
-  width: 100%;
+  /* Fixed width so it doesn't expand too wide */
+  width: 600px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
   padding: 2rem;
-  margin-top: -140px;
-}
-
-.contact-content-right {
-  width: 500px;
-  height: 100vh;
-  margin-top: -100px;
-  background-color: #111;
-  border-radius: 1rem;
+  margin-top: 0;
 }
 
 .contact-title {
@@ -64,7 +72,11 @@
   position: absolute;
   inset: -2px;
   border-radius: 0.5rem;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(250, 204, 21, 0.2), transparent 50%);
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(250, 204, 21, 0.2),
+    transparent 50%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -79,6 +91,9 @@ textarea.form-input {
   min-height: 120px;
 }
 
+/* --------------------
+   SUBMIT BUTTON
+-------------------- */
 .submit-button {
   display: flex;
   align-items: center;
@@ -102,11 +117,6 @@ textarea.form-input {
   cursor: not-allowed;
 }
 
-.send-icon {
-  width: 20px;
-  height: 20px;
-}
-
 .loading {
   display: flex;
   align-items: center;
@@ -122,6 +132,15 @@ textarea.form-input {
   animation: spin 1s linear infinite;
 }
 
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --------------------
+   STATUS MESSAGE
+-------------------- */
 .status-message {
   text-align: center;
   padding: 0.75rem;
@@ -139,9 +158,45 @@ textarea.form-input {
   color: #f87171;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+/* --------------------
+   RIGHT SIDE: 3D MODEL
+-------------------- */
+.contact-content-right {
+  /* Let it grow to fill available space */
+  flex: 1;
+  min-width: 500px;
+  min-height: 600px;
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+  /* Transparent background */
+}
+
+/* Center the Three.js canvas inside the container */
+.contact-content-right canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+/* --------------------
+   RESPONSIVE
+-------------------- */
+@media (max-width: 1024px) {
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 1rem 2rem;
+  }
+  .contact-content-left {
+    width: 100%;
+    max-width: 600px;
+  }
+  .contact-content-right {
+    width: 100%;
+    min-width: auto;
+    min-height: 400px;
+    margin-top: 2rem;
   }
 }
 
@@ -149,18 +204,13 @@ textarea.form-input {
   .contact-content-left {
     padding: 1.5rem;
   }
-
   .contact-title {
     font-size: 2rem;
   }
-
-  .contact-container {
-    flex-direction: column;
-    gap: 2rem;
+  .submit-button {
+    font-size: 1rem;
   }
-
   .contact-content-right {
-    width: 100%;
-    height: 40vh;
+    min-height: 300px;
   }
 }
