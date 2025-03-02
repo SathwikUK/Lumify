@@ -6,6 +6,7 @@ import Contact from './Contact';
 import Enhance from './Enhance';
 import Team from './Team';
 import { Section } from 'lucide-react';
+import lumify from '../assets/lum.mp4'
 
 const Home = () => {
   return (
@@ -44,7 +45,7 @@ const Home = () => {
             <div className="video-container">
               <video autoPlay loop muted playsInline>
                 <source
-                  src="https://www.w3schools.com/html/mov_bbb.mp4"
+                  src={lumify}
                   type="video/mp4"
                 />
               </video>

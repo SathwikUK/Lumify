@@ -128,6 +128,11 @@ app = Flask(__name__)
 CORS(app, resources={"/*": {"origins": "http://localhost:5173"}})
 app.config['RES_DIR'] = 'data/static'
 
+# New route for root URL
+@app.route('/')
+def index():
+    return 'Welcome to the Image Enhancement API!'
+
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'image' not in request.files:
@@ -198,5 +203,3 @@ def send_file_from_server(filename):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-

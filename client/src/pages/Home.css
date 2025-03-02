@@ -72,16 +72,20 @@
 
 /* Video Container */
 .video-container {
+  margin-left: 300px;
   position: relative;
   aspect-ratio: 16/9;
-  border-radius: 0.5rem;
+  border-radius: 10rem;
   overflow: hidden;
-  margin-top: 100px;
+  width: 500px;
+  height :500px;
+
 }
 
 .video-container video {
   width: 100%;
   height: 100%;
+  border-radius: 10rem;
   object-fit: cover;
 }
 

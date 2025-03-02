@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './Team.css';
 import ratimg from '../assets/ratnam sir.png'
+import sat from "../assets/sat.jpg";
+import ame from "../assets/ame.png"
+import rupa from "../assets/rupa.jpg";
 
 const Team = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,19 +19,19 @@ const Team = () => {
     {
       name: "Sathwik Uday Kiran",
       role: "Team Lead, Frontend & Backend Integration, Model Preparation, Team Manager",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
+      image: sat,
       description: "Leading the team, managing frontend and backend integration, preparing models, and overseeing project progress."
     },
     {
       name: "Rupa Talasila",
       role: "Researcher & Dataset Collection Specialist",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
+      image: rupa,
       description: "Responsible for researching relevant papers and collecting datasets for model training."
     },
     {
       name: "Ameer Sayyad",
       role: "Model Trainer & Adjustments Specialist",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+      image: ame,
       description: "Handles model training, making adjustments, and ensuring model accuracy."
     },
     {
