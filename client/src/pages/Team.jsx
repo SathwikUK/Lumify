@@ -11,7 +11,7 @@ const Team = () => {
 
   const teamMembers = [
     {
-      name: "Dr.Ch Vijayanandha Ratnam ",
+      name: "Mr. Ch Vijayananda Ratnam ",
       role: "Mentor",
       image: ratimg,
       description: "He is our guide in the project of low light image enhancement, providing direction and expertise throughout"
