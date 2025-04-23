@@ -124,9 +124,6 @@ Lumify/
 - ⚙️ Dependency issues → Double-check Python & Node versions
 
 ---
-<p align="center">
-  Made with ❤️ by BARS</a>
-</p>
 
 
 
@@ -134,3 +131,9 @@ Lumify/
 - 🧪 Deep Curve Estimation (low-light research)
 - 🧍‍♂️ face_recognition
 - ⚡ Vite & Framer Motion (amazing frontend experience)
+
+  ---
+  <p align="center">
+  Made with ❤️ by BARS</a>
+</p>
+
