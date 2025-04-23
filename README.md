@@ -1,6 +1,6 @@
 # ✨ Lumify - Low-Light Image Enhancer & Face Detector
 
-Lumify is a web application for enhancing low-light images and detecting faces. It uses a PyTorch neural network and Flask for backend inference, and a beautiful React + Vite interface on the frontend.
+Lumify is a web application for enhancing low-light images and detecting faces. It uses a PyTorch neural network(ZERO-DCE) and Flask for backend inference, and a beautiful React + Vite interface on the frontend.
 
 ---
 
