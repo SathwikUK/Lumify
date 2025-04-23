@@ -124,6 +124,9 @@ Lumify/
 - ⚙️ Dependency issues → Double-check Python & Node versions
 
 ---
+<p align="center">
+  Made with ❤️ by BARS</a>
+</p>
 
 
 
